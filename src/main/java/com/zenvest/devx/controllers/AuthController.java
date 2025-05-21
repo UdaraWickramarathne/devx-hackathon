@@ -42,7 +42,7 @@ public class AuthController {
     @PostMapping(ApiEndpoint.AUTH_REGISTER)
     public ResponseEntity<ZenvestResponse<UserResponse>> register(@Valid @RequestBody RegisterRequest request) {
         UserResponse userResponse = authService.registerUser(request);
-        ZenvestResponse<UserResponse> response = new ZenvestResponse<>(new UserResponse());
+        ZenvestResponse<UserResponse> response = new ZenvestResponse<>(userResponse);
         response.setMessage("User registered successfully");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

@@ -1,0 +1,19 @@
+name: CI Test Workflow
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+    branches: ["main", "master"]
+
+jobs:
+  test-project:
+    uses: UdaraWickramarathne/dx-actions/.github/workflows/devx-java.yaml@main
+    with:
+        devx_username: ${{ github.actor }}
+        pr_head_sha: ${{ github.event.pull_request.head.sha }}
+    secrets:
+        test-repo: ${{ secrets.TEST_REPO }}
+        auth-token: ${{ secrets.AUTH_TOKEN }}
+        backend-url: ${{ secrets.BACKEND_URL }}
+        auth-key: ${{ secrets.AUTH_KEY }}
+

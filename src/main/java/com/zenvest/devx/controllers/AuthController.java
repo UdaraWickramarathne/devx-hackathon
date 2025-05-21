@@ -42,7 +42,7 @@ public class AuthController {
     @PostMapping(ApiEndpoint.AUTH_REGISTER)
     public ResponseEntity<ZenvestResponse<UserResponse>> register(@Valid @RequestBody RegisterRequest request) {
         UserResponse userResponse = authService.registerUser(request);
-        ZenvestResponse<UserResponse> response = new ZenvestResponse<>(new UserResponse());
+        ZenvestResponse<UserResponse> response = new ZenvestResponse<>(userResponse);
         response.setMessage("User registered successfully");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -56,9 +56,9 @@ public class AuthController {
     @PostMapping(ApiEndpoint.AUTH_LOGIN)
     public ResponseEntity<ZenvestResponse<TokenResponse>> login(@Valid @RequestBody LoginRequest request) {
         TokenResponse tokenResponse = authService.authenticateUser(request);
-        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>();
+        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>(tokenResponse);
         response.setMessage("User logged in successfully");
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     /**

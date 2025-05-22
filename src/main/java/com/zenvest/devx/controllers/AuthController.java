@@ -39,27 +39,26 @@ public class AuthController {
      * @param request the request object containing user registration details
      * @return a ResponseEntity containing a ZenvestResponse with the created UserResponse object
      */
-    @PostMapping(ApiEndpoint.AUTH_REGISTER)
+@PostMapping(ApiEndpoint.AUTH_REGISTER)
     public ResponseEntity<ZenvestResponse<UserResponse>> register(@Valid @RequestBody RegisterRequest request) {
         UserResponse userResponse = authService.registerUser(request);
-        ZenvestResponse<UserResponse> response = new ZenvestResponse<>(new UserResponse());
+        ZenvestResponse<UserResponse> response = new ZenvestResponse<>(userResponse);
         response.setMessage("User registered successfully");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
-
+    }
     /**
      * Authenticates a user and generates a token.
      *
      * @param request the request object containing user login details
      * @return a ResponseEntity containing a ZenvestResponse with the generated TokenResponse object
      */
-    @PostMapping(ApiEndpoint.AUTH_LOGIN)
+   @PostMapping(ApiEndpoint.AUTH_LOGIN)
     public ResponseEntity<ZenvestResponse<TokenResponse>> login(@Valid @RequestBody LoginRequest request) {
         TokenResponse tokenResponse = authService.authenticateUser(request);
-        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>();
+        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>(tokenResponse);
         response.setMessage("User logged in successfully");
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-    }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
     /**
      * Refreshes the authentication token.

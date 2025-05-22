@@ -1,4 +1,5 @@
 package com.zenvest.devx;
+package com.zenvest.devx;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
@@ -12,5 +13,5 @@ public class DevXApplication {
         dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
         SpringApplication.run(DevXApplication.class, args);
     }
-
 }
+`

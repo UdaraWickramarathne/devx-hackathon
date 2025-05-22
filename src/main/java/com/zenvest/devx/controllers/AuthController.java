@@ -53,13 +53,13 @@ public class AuthController {
      * @param request the request object containing user login details
      * @return a ResponseEntity containing a ZenvestResponse with the generated TokenResponse object
      */
-    @PostMapping(ApiEndpoint.AUTH_LOGIN)
+   @PostMapping(ApiEndpoint.AUTH_LOGIN)
     public ResponseEntity<ZenvestResponse<TokenResponse>> login(@Valid @RequestBody LoginRequest request) {
         TokenResponse tokenResponse = authService.authenticateUser(request);
-        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>();
+        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>(tokenResponse);
         response.setMessage("User logged in successfully");
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-    }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
     /**
      * Refreshes the authentication token.

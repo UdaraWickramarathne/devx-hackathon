@@ -79,4 +79,10 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ZenvestResponse<>(false, null, e.getMessage()));
         }
     }
+    /**
+     * This method does nothing and is only for demonstration purposes.
+     */
+    private void doNothing() {
+        // Intentionally left blank
+    }
 }

@@ -11,6 +11,12 @@ public class DevXApplication {
         Dotenv dotenv = Dotenv.load();
         dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
         SpringApplication.run(DevXApplication.class, args);
+        dsakdnskdnsdkndsklndlnkdslkdn
+        dniwdksndskldnawnidiop wald kjnbs oald
+        kdnsdksnaaidwhn  ldanaldjknawoidu autoconfigure
+        
     }
-
+ waradi hutto
+ palayan kariya yanna
+ 
 }

@@ -130,13 +130,13 @@ DevX/
 
 ## ⚙️ Getting Started
 
-### 1. Clone the Repository
-```bash
-    git clone https://github.com/UdaraWickramarathne/devx-hackathon.git
-    cd devx-hackathon
-```
-
-### 2. Setup Environment Variables
+### 1. Fork the repository on GitHub.
+### 2. Clone your forked repository to your local machine:
+   ```bash
+      git clone https://github.com/<your-username>/<repo-name>.git
+      cd <repo-name>
+   ```
+### 3. Setup Environment Variables
 Create `.env` file in the root directory based on `.env.example`:
 ```yaml
 # Application Info
@@ -155,12 +155,37 @@ JWT_SECRET=your_secret_key
 JWT_ACCESS_TOKEN_EXPIRY_MS=3600000
 ```
 
-### 3. Run the Application
+### 4. Run the Application
 ```bash
 ./mvnw spring-boot:run
 ```
 
+---
+
 The API will be available at `http://localhost:8080`
+
+---
+
+### 5. (Optional) Create a new branch.
+```bash
+   git checkout -b bugfix/bug-description
+```
+### 6. Fix a bug or bugs — there's no need to fix all of them to open a pull request.
+### 7. Commit your changes
+```bash
+   git add .
+   git commit -m "Fix: brief description of the bug fix"
+```
+### 6. Push your changes
+```bash
+   git push origin main
+   ```
+
+#### - (Optional) If you create a new branch, use
+```bash
+   git push origin bugfix/bug-description
+  ```
+### 7. Open a Pull Request from your forked repository to the main repository.
 
 ---
 
@@ -260,34 +285,6 @@ Authorization: Bearer YOUR_JWT_TOKEN
 - Secure token validation
 - Password encryption with BCrypt
 - Cross-Origin Resource Sharing (CORS) configuration
-
----
-
-## 🔧 Contributing
-
-1. Fork the repository on GitHub.
-2. Clone your forked repository to your local machine:
-   ```bash
-   git clone https://github.com/<your-username>/<repo-name>.git
-   cd <repo-name>
-3. (Optional) Create a new branch.
-    ```bash
-   git checkout -b bugfix/bug-description
-4. Fix a bug or bugs — there's no need to fix all of them to open a pull request.
-5. Commit your changes
-    ```bash
-   git add .
-   git commit -m "Fix: brief description of the bug fix"
-6. Push your changes
-    ```bash
-   git push origin main
-   ```
-   
-    - (Optional) If you create a new branch, use
-        ```bash
-        git push origin bugfix/bug-description
-       ```
-7. Open a Pull Request from your forked repository to the main repository.
 
 ---
 

@@ -64,10 +64,10 @@ A secure, robust banking and financial management backend built with **Spring Bo
 
 ### 📤 Transfers
 
-| Method | Endpoint                                    | Description                            |
-|--------|---------------------------------------------|----------------------------------------|
-| POST   | `/api/authenticate/accounts/transfer`       | Transfer funds between accounts        |
-| GET    | `/api/authenticate/accounts/transfer/history` | Get transfer history                 |
+| Method | Endpoint                                  | Description                            |
+|--------|-------------------------------------------|----------------------------------------|
+| POST   | `/api/authenticate/transfer`      | Transfer funds between accounts        |
+| GET    | `/api/authenticate/transfer/history` | Get transfer history                 |
 
 ---
 

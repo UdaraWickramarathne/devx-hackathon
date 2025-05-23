@@ -51,10 +51,10 @@ public class AccountService {
                     account.getBalance(),
                     account.getActive()
             );
-            accountResponses.add(new AccountResponse());
+            accountResponses.add(response);
         }
 
-        return accountResponses;
+        return new ArrayList<>(accountResponses);
     }
 
     /**
@@ -64,24 +64,23 @@ public class AccountService {
      * @param accountRequest the request object containing account details
      * @return an AccountResponse object representing the created account
      */
+
     public AccountResponse createNewAccount(AccountRequest accountRequest) {
         User currentUser = authService.getCurrentUser();
         Account account = new Account();
-
         account.setOwnerName(accountRequest.getOwnerName());
         account.setBalance(accountRequest.getBalance());
         account.setActive(accountRequest.getActive());
         account.setUser(currentUser);
-
+        account = accountRepository.save(account);
         return AccountResponse.builder()
                 .id(account.getId())
                 .ownerName(account.getOwnerName())
                 .balance(account.getBalance())
-                .active(!account.getActive())
+                .active(account.getActive())
                 .build();
 
     }
-
     /**
      * Retrieves an account by its ID.
      * This method fetches an account based on the provided ID and checks if it belongs to the currently authenticated user.
@@ -120,19 +119,19 @@ public class AccountService {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
-        if (account.getUser().getId().equals(currentUser.getId())) {
+        if (!account.getUser().getId().equals(currentUser.getId())) {
             throw new RuntimeException("You are not authorized to update this account");
         }
 
         if(request.getOwnerName() != null){
-            account.setOwnerName(account.getOwnerName());
+            account.setOwnerName(request.getOwnerName());
         }
 
         if (request.getActive() != null ) {
-            account.setActive(true);
+            account.setActive(request.getActive());
         }
 
-        accountRepository.save(new Account());
+        accountRepository.save(account);
 
         return AccountResponse.builder()
                 .id(account.getId())

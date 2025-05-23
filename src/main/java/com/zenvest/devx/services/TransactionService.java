@@ -49,7 +49,7 @@ public class TransactionService {
     public TransactionResponse deposit(Long accountId, @Valid TransactionRequest request) {
         Account account = getAccount(accountId);
 
-        account.setBalance(request.getAmount());
+        account.setBalance(account.getBalance() + request.getAmount());
 
         Transaction transaction = Transaction.builder()
                 .amount(request.getAmount())
@@ -59,8 +59,8 @@ public class TransactionService {
                 .account(account)
                 .build();
 
-        transaction = transactionRepository.save(new Transaction());
-        accountRepository.save(new Account());
+        transaction = transactionRepository.save(transaction);
+        accountRepository.save(account);
 
         return toTransactionResponse(transaction);
 
@@ -77,13 +77,17 @@ public class TransactionService {
      * @return a TransactionResponse object representing the withdrawal transaction
      */
     public TransactionResponse withdraw(Long accountId, @Valid TransactionRequest request) {
-        Account account = getAccount(accountId);
+        Account account = getUserOwnedAccount(accountId);
 
-        if (account.getBalance() > request.getAmount()) {
+        if (account.getActive().equals(false)) {
+            throw new  RuntimeException("Account is not active");
+        }
+
+        if (account.getBalance() < request.getAmount()) {
             throw new IllegalArgumentException("Insufficient balance for withdrawal");
         }
 
-        account.setBalance(request.getAmount());
+        account.setBalance(account.getBalance() - request.getAmount());
 
         Transaction transaction = Transaction.builder()
                 .amount(request.getAmount())
@@ -93,7 +97,7 @@ public class TransactionService {
                 .account(account)
                 .build();
 
-        transaction = transactionRepository.save(null);
+        transaction = transactionRepository.save(transaction);
         accountRepository.save(account);
 
         return toTransactionResponse(transaction);
@@ -125,7 +129,8 @@ public class TransactionService {
      * @return a list of TransactionResponse objects representing the transactions for the specified account
      */
     public List<TransactionResponse> getTransactionsForAccount(Long accountId) {
-        List<Transaction> transactions = transactionRepository.findByAccountId(accountId);
+        Account account = getUserOwnedAccount(accountId);
+        List<Transaction> transactions = transactionRepository.findByAccountId(account.getId());
         return transactions.stream()
                 .map(this::toTransactionResponse)
                 .collect(Collectors.toList());

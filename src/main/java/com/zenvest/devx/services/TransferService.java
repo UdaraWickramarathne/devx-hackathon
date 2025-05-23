@@ -62,8 +62,9 @@ public class TransferService {
         }
 
         from.setBalance(from.getBalance() - request.getAmount());
+        to.setBalance(to.getBalance() + request.getAmount());
 
-        from = accountRepository.save(new Account());
+        from = accountRepository.save(from);
         accountRepository.save(to);
 
         Transfer transfer = Transfer.builder()
@@ -74,7 +75,9 @@ public class TransferService {
                 .toAccount(to)
                 .build();
 
-        return toTransferResponse(null);
+        transferRepository.save(transfer);
+
+        return toTransferResponse(transfer);
 
     }
 

@@ -189,6 +189,10 @@ The API will be available at `http://localhost:8080`
 
 ---
 
+### Postman Collection Json: [Zenvest Collection](https://drive.google.com/file/d/1iftso7zT5my4OD5apvBi0nJjHCg3gbSy/view?usp=sharing)
+
+---
+
 ## 🚀 Example Requests
 
 ### Register a new user

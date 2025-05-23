@@ -52,6 +52,7 @@ public class TransferController {
     public ResponseEntity<ZenvestResponse<TransferHistoryResponse>> getTransferHistory() {
         List<TransferHistoryResponse> transferHistoryResponses = transferService.getTransferHistoryForCurrentUser();
         ZenvestResponse<TransferHistoryResponse> response = new ZenvestResponse<>();
+        response.setResults(transferHistoryResponses);
         response.setMessage("Transfers retrieved successfully");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }

@@ -50,12 +50,20 @@ public class AuthService {
             throw new IllegalArgumentException("Password must be at least 6 characters");
         }
 
+        if(userRepository.findByUsername(registerRequest.getUsername()).isPresent()){
+            throw new IllegalArgumentException("Username is already in used");
+        }
+
+        if(userRepository.findByEmail(registerRequest.getEmail()).isPresent()){
+            throw new IllegalArgumentException("Email is already in used");
+        }
+
         User user = new User();
         user.setEmail(registerRequest.getEmail());
-        user.setPassword(registerRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setUsername(registerRequest.getUsername());
 
-        user = userRepository.save(new User());
+        user = userRepository.save(user);
 
         return UserResponse.builder()
                 .id(user.getId())
@@ -82,12 +90,12 @@ public class AuthService {
 
         User user = userOptional.get();
 
-        if (request.getPassword().equals(user.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
         String accessToken = jwtService.buildToken(user.getUsername());
-        return new TokenResponse(null);
+        return new TokenResponse(accessToken);
     }
 
     /**
@@ -100,7 +108,7 @@ public class AuthService {
      */
     public TokenResponse refreshToken(String refreshToken) throws AuthenticationException {
         boolean isValid = jwtService.isTokenValid(refreshToken);
-        if (!isValid) {
+        if (isValid) {
             String username = jwtService.extractUsername(refreshToken);
             String newToken = jwtService.buildToken(username);
             return new TokenResponse(newToken);

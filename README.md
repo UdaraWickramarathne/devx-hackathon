@@ -246,7 +246,7 @@ Authorization: Bearer YOUR_JWT_TOKEN
 
 ### Transfer funds
 ```http
-POST /api/authenticate/accounts/transfer
+POST /api/authenticate/transfer
 Content-Type: application/json
 Authorization: Bearer YOUR_JWT_TOKEN
 

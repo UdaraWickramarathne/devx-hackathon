@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://aaxjdkgyiasvrscexksn.supabase.co/storage/v1/object/public/devx-publics//devx-logo.png" width="350" alt="DevX Logo" />
+  <img src="https://i.imgur.com/MYE27wC.png" width="350" alt="DevX Logo" />
 </p>
 
 # Zenvest Banking API 💸

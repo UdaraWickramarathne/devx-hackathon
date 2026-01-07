@@ -35,6 +35,7 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
+    
     /**
      * Registers a new user.
      * This method is responsible for registering a new user. It checks if the password is valid, if the username and email are already in use,

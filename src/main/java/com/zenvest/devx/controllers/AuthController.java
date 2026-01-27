@@ -58,7 +58,7 @@ public class AuthController {
         TokenResponse tokenResponse = authService.authenticateUser(request);
         ZenvestResponse<TokenResponse> response = new ZenvestResponse<>();
         response.setMessage("User logged in successfully");
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     /**

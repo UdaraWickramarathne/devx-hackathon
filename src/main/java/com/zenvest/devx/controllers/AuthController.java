@@ -56,7 +56,7 @@ public class AuthController {
     @PostMapping(ApiEndpoint.AUTH_LOGIN)
     public ResponseEntity<ZenvestResponse<TokenResponse>> login(@Valid @RequestBody LoginRequest request) {
         TokenResponse tokenResponse = authService.authenticateUser(request);
-        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>();
+        ZenvestResponse<TokenResponse> response = new ZenvestResponse<>(tokenResponse);
         response.setMessage("User logged in successfully");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

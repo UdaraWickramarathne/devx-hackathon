@@ -136,7 +136,27 @@ DevX/
       git clone https://github.com/<your-username>/<repo-name>.git
       cd <repo-name>
    ```
-### 3. Setup Environment Variables
+
+### 3. Start MySQL Database with Docker (Recommended)
+Run the MySQL database using Docker Compose:
+```bash
+docker-compose up -d
+```
+
+This will start a MySQL 8.0 container with the following default credentials:
+- **Database**: `zenvest`
+- **Username**: `zenvest_user`
+- **Password**: `zenvest_password`
+- **Port**: `3306`
+
+To stop the database:
+```bash
+docker-compose down
+```
+
+> **Note**: If you prefer to use your own MySQL installation, skip this step and configure your database credentials in the `.env` file.
+
+### 4. Setup Environment Variables
 Create `.env` file in the root directory based on `.env.example`:
 ```yaml
 # Application Info
@@ -144,8 +164,8 @@ SPRING_APPLICATION_NAME=DevX
 
 # MySQL Database Configuration
 SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/zenvest?createDatabaseIfNotExist=true
-SPRING_DATASOURCE_USERNAME=your_mysql_username
-SPRING_DATASOURCE_PASSWORD=your_mysql_password
+SPRING_DATASOURCE_USERNAME=zenvest_user
+SPRING_DATASOURCE_PASSWORD=zenvest_password
 
 # Server Port
 SERVER_PORT=8080
@@ -155,7 +175,9 @@ JWT_SECRET=your_secret_key
 JWT_ACCESS_TOKEN_EXPIRY_MS=3600000
 ```
 
-### 4. Run the Application
+> **Tip**: If using Docker Compose, the credentials above match the default configuration.
+
+### 5. Run the Application
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -164,19 +186,19 @@ JWT_ACCESS_TOKEN_EXPIRY_MS=3600000
 
 The API will be available at `http://localhost:8080`
 
----
+---6
 
 ### 5. (Optional) Create a new branch.
 ```bash
    git checkout -b bugfix/bug-description
 ```
-### 6. Fix a bug or bugs — there's no need to fix all of them to open a pull request.
-### 7. Commit your changes
+### 7. Fix a bug or bugs — there's no need to fix all of them to open a pull request.
+### 8. Commit your changes
 ```bash
    git add .
    git commit -m "Fix: brief description of the bug fix"
 ```
-### 6. Push your changes
+### 9. Push your changes
 ```bash
    git push origin main
    ```
@@ -185,7 +207,7 @@ The API will be available at `http://localhost:8080`
 ```bash
    git push origin bugfix/bug-description
   ```
-### 7. Open a Pull Request from your forked repository to the main repository.
+### 10. Open a Pull Request from your forked repository to the main repository.
 
 ---
 
